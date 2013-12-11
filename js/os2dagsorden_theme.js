@@ -116,6 +116,8 @@ function hide_side_menu(){
 	jQuery("#show_hide_menu_button").val("⇒");
 	jQuery("#region-content").removeClass("grid-18");
 	jQuery("#region-content").addClass("grid-24");
+	
+	jQuery(".attachment_text_container .attachment_text_trimmed_container, .attachment_text_container .attachment_text_full_container").addClass("attachment_text_max_size");
   });
 }
 
@@ -127,6 +129,7 @@ function show_side_menu(){
 	jQuery("#show_hide_menu_button").val("⇐");
 	jQuery("#region-content").removeClass("grid-24");
 	jQuery("#region-content").addClass("grid-18");
+	jQuery(".attachment_text_container .attachment_text_trimmed_container, .attachment_text_container .attachment_text_full_container").removeClass("attachment_text_max_size");
 }
 
 /**
