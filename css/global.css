@@ -1499,9 +1499,6 @@ a.annotator-wrapper {
 .attachment_text_container .attachment-text{
   max-width: 425px;
 }
-.attachment-text{
-	overflow: auto !important;
-}
 .attachment_text_container .attachment_text_full_container, .attachment_text_container .attachment_text_trimmed_container{
   padding: 5px 5px 0  5px;
 }
