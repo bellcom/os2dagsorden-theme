@@ -28,11 +28,11 @@
 function os2dagsorden_theme_preprocess_page(&$variables) 
 {    
     drupal_add_js(drupal_get_path('theme', 'os2dagsorden_theme') . '/js/os2dagsorden_theme.js');
-    drupal_add_js('add_show_hide_menu_behaviour('.variable_get('os2dagsorden_colapse_menu', true).');', 'inline');
+    drupal_add_js('add_show_hide_menu_behaviour(' . variable_get('os2dagsorden_collapse_menu', true) . ');', 'inline');
     drupal_add_js('add_tablet_orientation_listener();', 'inline');
     drupal_add_js('add_indicator_help_text();', 'inline');
     drupal_add_js('hide_print_buttons();', 'inline');
-		if (variable_get('os2dagsorden_colapse_menu', true)=="false")
+		if (variable_get('os2dagsorden_collapse_menu', true)=="false")
 		  drupal_add_js('resize_listener();', 'inline');
 		
     $view = views_get_page_view();
@@ -40,7 +40,8 @@ function os2dagsorden_theme_preprocess_page(&$variables)
 	global $base_path;	
         if ($view->name == 'meeting_details') {
             //adding expand/collapse behaviour to meeting details view
-            drupal_add_js('bullet_point_add_expand_behaviour("'. $base_path .'?q=", ' . variable_get('os2dagsorden_expand_attachment', true) . ',  ' . variable_get('os2dagsorden_expand_all_bullets', false) . ')', 'inline');
+            $os2dagsorden_expand_all_bullets= variable_get('os2dagsorden_expand_all_bullets', false)?true:'false';
+            drupal_add_js('bullet_point_add_expand_behaviour("'. $base_path .'?q=", ' . variable_get('os2dagsorden_expand_attachment', true) . ',  ' . $os2dagsorden_expand_all_bullets . ')', 'inline');
             $variables['views'] = '';
             
             //adding pagescroll
