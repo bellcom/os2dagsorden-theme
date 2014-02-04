@@ -193,7 +193,7 @@ function bullet_point_details_init(url, massive_bilag_expand){
 
 function bullet_points_expand_all(bulletPoint, bulletPointIndex, url, massive_bilag_expand){
   var pathname = window.location.pathname;
-	jQuery("#attachments_container_"+bulletPointIndex).show();
+  jQuery("#attachments_container_"+bulletPointIndex).show();
   jQuery("#btn_hide_show_attachments_"+bulletPointIndex).val("⇑");
 	jQuery("[id^=attachment_text_container_"+bulletPointIndex+"_]").each(function(index_attachment){
 	  attachment_load_content(bulletPointIndex, index_attachment, url);
@@ -201,6 +201,7 @@ function bullet_points_expand_all(bulletPoint, bulletPointIndex, url, massive_bi
 		jQuery(this).show();	    
 	    
 	});
+  jQuery("#btn_hide_show_all_attachments_text_"+bulletPointIndex).val('⇈');   
 }
 
 /**
