@@ -405,3 +405,9 @@ function hide_budget_menu(){
       jQuery("#menu-budget").parent().hide();
   });  
 }
+
+function hide_search_block_title(){
+ jQuery(document).ready(function() {   
+   jQuery("#block-views-exp-meetings-search-page .block-title").hide();
+  });
+}
