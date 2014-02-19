@@ -75,9 +75,9 @@ function add_tablet_orientation_listener(){
  */
 function add_show_hide_menu_behaviour(menu_colapse){
    jQuery(document).ready(function() {
-	  if(menu_colapse)			
+	  if(menu_colapse)
 		   hide_side_menu();
-			
+
        jQuery("#show_hide_menu_button").click(function(){
 	  if (jQuery("#show_hide_menu_button").val() == "⇐")
 	      hide_side_menu();
@@ -85,10 +85,10 @@ function add_show_hide_menu_behaviour(menu_colapse){
 	      show_side_menu();
  	});
        var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-      
+
 			 if (width < 1000)
-	      hide_side_menu();	
-   }); 
+	      hide_side_menu();
+   });
 }
 
 function resize_listener(){
@@ -96,10 +96,10 @@ function resize_listener(){
 	  var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
 	  if (width < 1000)
 	    hide_side_menu();
-	  else 
+	  else
 	    show_side_menu();
     };
-    
+
     var resizeTimer;
     jQuery(window).resize(function() {
 	clearTimeout(resizeTimer);
@@ -112,11 +112,11 @@ function resize_listener(){
  */
 function hide_side_menu(){
   jQuery(document).ready(function() {
-	jQuery(".region-sidebar-second-inner").hide(); 
+	jQuery(".region-sidebar-second-inner").hide();
 	jQuery("#show_hide_menu_button").val("⇒");
 	jQuery("#region-content").removeClass("grid-18");
 	jQuery("#region-content").addClass("grid-24");
-	
+
 	jQuery(".attachment_text_container .attachment_text_trimmed_container, .attachment_text_container .attachment_text_full_container").addClass("attachment_text_max_size");
   });
 }
@@ -125,7 +125,7 @@ function hide_side_menu(){
  * A funtion show hide the menu
  */
 function show_side_menu(){
-	jQuery(".region-sidebar-second-inner").show(); 
+	jQuery(".region-sidebar-second-inner").show();
 	jQuery("#show_hide_menu_button").val("⇐");
 	jQuery("#region-content").removeClass("grid-24");
 	jQuery("#region-content").addClass("grid-18");
@@ -134,21 +134,21 @@ function show_side_menu(){
 
 /**
  * Adds the expand behaviour to bullet point on meeting or bullet-point view
- * 
+ *
  * @url is base url, used to send the parameted to attachment_add_expand_behaviour()
  */
 function bullet_point_add_expand_behaviour(url, massive_bilag_expand, bullet_points_expand){
   var pathname = window.location.pathname;
-   jQuery(document).ready(function() {   
+   jQuery(document).ready(function() {
 	jQuery(".bullet-point-attachments .view-content .item-list .ul-item-list-dagsordenspunkt").each(function(index) {
 	  jQuery(this).attr("id","attachments_container_"+index);
 	  jQuery(this).hide();
-	  
+
 	  jQuery(this).parent().parent().parent().children(".hide_show_button_container").append("<input type='button' class='button' id='btn_hide_show_attachments_"+index+"' value='⇓'></a>");
-	  
-	 jQuery("#btn_hide_show_attachments_"+index).click(function(){	    
+
+	 jQuery("#btn_hide_show_attachments_"+index).click(function(){
  	    jQuery("#attachments_container_"+index).toggle();
-	    
+
 	    if (jQuery("#btn_hide_show_attachments_"+index).val() == "⇓"){//closed
 		jQuery("#btn_hide_show_attachments_"+index).val("⇑");
 		//saving in local storage
@@ -160,14 +160,14 @@ function bullet_point_add_expand_behaviour(url, massive_bilag_expand, bullet_poi
 		window.localStorage.setItem(pathname + "-attachments_container_"+index, "false");
 	    }
  	  });
-	  
-	  attachment_add_expand_all_behaviour(this, index, url, massive_bilag_expand);  
+
+	  attachment_add_expand_all_behaviour(this, index, url, massive_bilag_expand);
 	  attachment_add_expand_behaviour(this,index,url, massive_bilag_expand);
-	 		
-		if (bullet_points_expand && (window.localStorage.getItem(pathname + "-attachments_container_"+index)===null||window.localStorage.getItem(pathname + "-attachments_container_"+index)===true)){	
+
+		if (bullet_points_expand && (window.localStorage.getItem(pathname + "-attachments_container_"+index)===null||window.localStorage.getItem(pathname + "-attachments_container_"+index)===true)){
   		bullet_points_expand_all(this, index, url, massive_bilag_expand);
 	  }
-	  else{		 
+	  else{
 				 //reading from local storage
 	  if (JSON.parse(window.localStorage.getItem(pathname + "-attachments_container_"+index)) === true){
 	    jQuery("#btn_hide_show_attachments_"+index).click();
@@ -179,13 +179,13 @@ function bullet_point_add_expand_behaviour(url, massive_bilag_expand, bullet_poi
 
 /**
  * Initiator function to add expand behaviour for bullet point, is used on bullet-point view
- * 
+ *
  * @url is base url, used to send the parameted to attachment_add_expand_behaviour()
  */
 function bullet_point_details_init(url, massive_bilag_expand){
-  jQuery(document).ready(function() {   
+  jQuery(document).ready(function() {
   jQuery(".item-list-dagsordenspunkt .ul-item-list-dagsordenspunkt").each(function(index) {
-	attachment_add_expand_all_behaviour(this, index, url, massive_bilag_expand);  
+	attachment_add_expand_all_behaviour(this, index, url, massive_bilag_expand);
 	attachment_add_expand_behaviour(this, index, url, massive_bilag_expand);
     });
   });
@@ -198,46 +198,46 @@ function bullet_points_expand_all(bulletPoint, bulletPointIndex, url, massive_bi
 	jQuery("[id^=attachment_text_container_"+bulletPointIndex+"_]").each(function(index_attachment){
 	  attachment_load_content(bulletPointIndex, index_attachment, url);
 		jQuery("#btn_hide_show_attachment_text_"+bulletPointIndex+"_"+index_attachment).val("⇑");
-		jQuery(this).show();	    
-	    
+		jQuery(this).show();
+
 	});
 }
 
 /**
  * Add expand all behavious for bullet point - opens all of its children.
- * 
+ *
  * Also loads the comment of the attachment via Ajax and adds the annotator to it, if these actions has not been done before
  *
  */
 function attachment_add_expand_all_behaviour(bulletPoint, bulletPointIndex, url, massive_bilag_expand){
   var pathname = window.location.pathname;
   jQuery(bulletPoint).prepend("<input type='button' class='button hide_show_all_attachments_text' id='btn_hide_show_all_attachments_text_"+bulletPointIndex+"' value='⇊'></a>");
-  
+
   jQuery("#btn_hide_show_all_attachments_text_"+bulletPointIndex).click(function(){
     if (jQuery("#btn_hide_show_all_attachments_text_"+bulletPointIndex).val() == "⇊"){
 	jQuery("[id^=attachment_text_container_"+bulletPointIndex+"_]").each(function(index_attachment){
 	  if (massive_bilag_expand || !jQuery(this).children().first().hasClass("attachment_text_trimmed_container")){//skip bilags
 	    //saving in the local storage
 	    window.localStorage.setItem(pathname + "-attachment_text_container_"+bulletPointIndex+"_"+index_attachment, "true");
-	    jQuery(this).show();	    
+	    jQuery(this).show();
 	    //handle single expand button
 	    jQuery("#btn_hide_show_attachment_text_"+bulletPointIndex+"_"+index_attachment).val("⇑");
 	  }
-	  
+
 	  attachment_load_content(bulletPointIndex, index_attachment, url);
 	});
-	
+
 	jQuery("#btn_hide_show_all_attachments_text_"+bulletPointIndex).val("⇈");
     } else {
       	jQuery("[id^=attachment_text_container_"+bulletPointIndex+"_]").each(function(index_attachment){
 	  //saving in the local storage
 	  window.localStorage.setItem(pathname + "-attachment_text_container_"+bulletPointIndex+"_"+index_attachment, "false");
 	  jQuery(this).hide();
-	  
+
 	  //handle single expand button
 	  jQuery("#btn_hide_show_attachment_text_"+bulletPointIndex+"_"+index_attachment).val("⇓");
 	});
-	
+
 	jQuery("#btn_hide_show_all_attachments_text_"+bulletPointIndex).val("⇊");
     }
   });
@@ -245,7 +245,7 @@ function attachment_add_expand_all_behaviour(bulletPoint, bulletPointIndex, url,
 
 /**
  * Adds expand behaviour on a single attachment.
- * 
+ *
  * Also calls attachment_load_content
  */
 function attachment_add_expand_behaviour(bulletPoint, bulletPointIndex, url, massive_bilag_expand){
@@ -258,9 +258,9 @@ function attachment_add_expand_behaviour(bulletPoint, bulletPointIndex, url, mas
     jQuery("#btn_hide_show_attachment_text_"+bulletPointIndex+"_"+index_attachment).click(function(){
       //hide or show the content container
       jQuery("#attachment_text_container_"+bulletPointIndex+"_"+index_attachment).toggle();
-      
+
       attachment_load_content(bulletPointIndex, index_attachment, url);
-      
+
       //change the arrow button icon
       if (jQuery("#btn_hide_show_attachment_text_"+bulletPointIndex+"_"+index_attachment).val() == "⇓"){//closed
 	jQuery("#btn_hide_show_attachment_text_"+bulletPointIndex+"_"+index_attachment).val("⇑");
@@ -272,7 +272,7 @@ function attachment_add_expand_behaviour(bulletPoint, bulletPointIndex, url, mas
 	//saving in local storage
 	window.localStorage.setItem(pathname + "-attachment_text_container_"+bulletPointIndex+"_"+index_attachment, "false");
       }
-      
+
       //handle expand all
       if (massive_bilag_expand){
 	if (jQuery("[id^=btn_hide_show_attachment_text_"+bulletPointIndex+"_][value='⇓']").length > 0)
@@ -291,44 +291,44 @@ function attachment_add_expand_behaviour(bulletPoint, bulletPointIndex, url, mas
 	jQuery("#btn_hide_show_all_attachments_text_"+bulletPointIndex).val(new_val);
       }
     });
-    
+
     //reading from local storage
     if (JSON.parse(window.localStorage.getItem(pathname + "-attachment_text_container_"+bulletPointIndex+"_"+index_attachment)) === true){
       jQuery("#btn_hide_show_attachment_text_"+bulletPointIndex+"_"+index_attachment).click();
     }
-  });	
+  });
 }
 
 /**
  * Loads the content of the attachment and places it into the container
- * 
+ *
  * Also loads the comment of the attachment via Ajax and adds the annotator to it, if these actions has not been done before
  */
 function attachment_load_content(bulletPointIndex, index_attachment, url){
     //load the content on first click and add the annotator
     if (jQuery("#attachment_text_container_"+bulletPointIndex+"_"+index_attachment).children().contents().first().text() == "Vent venligst..."){
-      //get meeting id, bullet-point id and bilag id		
+      //get meeting id, bullet-point id and bilag id
       classes = jQuery("#attachment_text_container_"+bulletPointIndex+"_"+index_attachment).children().attr('class').split(' ');
       var cl = jQuery.grep(classes, function(string, i){
 	return (string.indexOf("bpa-") == 0);
       });
-      
+
       cl_arr = String(cl).split("-");
       var bilag_id = cl_arr[3];
       var bullet_point_id = cl_arr[2];
       var meeting_id = cl_arr[1];
-      
+
       //add real content
       jQuery.get(url + "meeting/" + meeting_id + "/bullet-point/" + bullet_point_id + "/bullet-point-attachment-raw/" + bilag_id, function(html) {
 	//remove dummy text
 	jQuery("#attachment_text_container_"+bulletPointIndex+"_"+index_attachment).children().contents().first().remove();
 	jQuery("#attachment_text_container_"+bulletPointIndex+"_"+index_attachment).children().contents().first().remove();
-	
+
 	jQuery("#attachment_text_container_"+bulletPointIndex+"_"+index_attachment).children().first().append(html);
-	
+
 	//add annotator to it
 	add_annotator(meeting_id, bullet_point_id, bilag_id, ".bpa-" + meeting_id + "-" + bullet_point_id + "-" + bilag_id,url, false);
-	
+
 	//add preview stamp picture, if is actual bilag
 	if (jQuery(".bpa-" + meeting_id + "-" + bullet_point_id + "-" + bilag_id).hasClass("attachment_text_trimmed_container"))
 	  jQuery(".bpa-" + meeting_id + "-" + bullet_point_id + "-" + bilag_id).prepend('<div class="indicator-preview"></div>');
@@ -338,7 +338,7 @@ function attachment_load_content(bulletPointIndex, index_attachment, url){
 
 /**
  * Adds notes indicators, to bullet point attachment
- * 
+ *
  */
 function bullet_point_attachment_add_notes_indicator(ids){
   jQuery(document).ready(function() {
@@ -352,7 +352,7 @@ function bullet_point_attachment_add_notes_indicator(ids){
 
 /**
  * Checks if device is touchable
- * 
+ *
  */
 function isTouchDevice(){
   return "ontouchstart" in window || window.DocumentTouch && document instanceof DocumentTouch;
@@ -363,18 +363,18 @@ function addPagescroller(){
     jQuery(document).ready(function() {
       	var maxPages = jQuery('.views-field-php-4').size();
 	var page = 0;
-	
+
 	if (maxPages > 1){//meeting is not empty
 	    jQuery('.bullet-point-attachments').pageScroller({
 		  navigation: true,
 		  sectionClass: 'views-field-php-4',
-	    });	
-	    
+	    });
+
 	    jQuery('.bullet-point-attachments').prepend('<div id="arrow-controls" class="light right">'
 	    + '<a href="#" class="prev"></a><br/>'
 	    + '<a href="#" class="next"></a>'
 	    + '</div>');
-	    
+
 	    // assigns 'next' API command to link
 	    jQuery('#arrow-controls .next').bind('click', function(e){
 		    e.preventDefault();
@@ -385,7 +385,7 @@ function addPagescroller(){
 		    pageScroller.next();
 	    });
 
-	    // assigns 'previous' API command to link		
+	    // assigns 'previous' API command to link
 	    jQuery('#arrow-controls .prev').bind('click', function(e){
 		    e.preventDefault();
 		    if (page > 1)
@@ -395,12 +395,12 @@ function addPagescroller(){
 		    pageScroller.prev();
 	    });
 	}
-    }); 
+    });
   }
 }
 
 function hide_budget_menu(){
   jQuery(document).ready(function() {
       jQuery("#menu-budget").parent().hide();
-  });  
+  });
 }
