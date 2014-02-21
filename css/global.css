@@ -95,7 +95,7 @@ body{
 }
 
 .highlight {
-    background-color:yellow;
+    background-color:#80B853;
 }
 /*---------------------------- Small Fixes Start ----------------------------*/
 
@@ -1369,6 +1369,7 @@ a.annotator-wrapper {
 
 .annotator-touch-widget.annotator-touch-controls{
   background: none;
+  z-index: 1;
 }
 .annotator-touch-widget.annotator-touch-controls .annotator-touch-widget-inner{
   box-shadow: none;
