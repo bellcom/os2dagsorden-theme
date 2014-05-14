@@ -38,16 +38,15 @@ function os2dagsorden_theme_ringsted_preprocess_page(&$variables) {
 	if ($view->name == 'meeting_details') {
 	    //adding expand/collapse behaviour to meeting details view
 	    drupal_add_js('bullet_point_add_expand_behaviour_ringsted("'. $base_path .'?q=", ' . variable_get('os2dagsorden_expand_bilag', true) . ',  ' . variable_get('os2dagsorden_expand_all_bullets', false) . ')', 'inline');
-	    if (variable_get('os2dagsorden_expand_bilag_sag_bullet', true)){
-		drupal_add_js('open_all_bilag_case_bullet_points();', 'inline');
-	    }
+            drupal_add_js('open_all_bilag_case_bullet_points(' . variable_get('os2dagsorden_expand_bilags', "true") . ','. variable_get('os2dagsorden_expand_cases', "false") .')', 'inline');
+              
+	    
 	}
 	if ($view->name == 'speaking_paper') {
             //adding expand/collapse behaviour bullet point details view
             drupal_add_js('bullet_point_details_init_ringsted("'. $base_path .'?q=", ' . variable_get('os2dagsorden_expand_bilag', true) . ')', 'inline');
-	    if (variable_get('os2dagsorden_expand_bilag_sag_bullet', true)){
-		drupal_add_js('open_all_bilag_case_bullet_points();', 'inline');
-	    }
+	    drupal_add_js('open_all_bilag_case_bullet_points(' . variable_get('os2dagsorden_expand_bilags', "true") . ','. variable_get('os2dagsorden_expand_cases', "false") .')', 'inline');
+              
         }
 }
 }
