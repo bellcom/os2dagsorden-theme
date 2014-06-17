@@ -31,7 +31,30 @@ if (!Array.prototype.indexOf) {
     return -1;
   };
   }
+  
   })(jQuery);
+  
+ jQuery(document).ready(function() {
+    jQuery('.form-item-from-date-value-date input.form-text').change(function(){
+          jQuery(this).val(prepareDate(jQuery(this).val()));
+    })
+    jQuery('.form-item-to-date-value-date input.form-text').change(function(){
+          jQuery(this).val(prepareDate(jQuery(this).val()));
+    })
+}); 
+ 
+/* Changed ddmmyy and ddmmyyyy date formats to dd-mm-yyyy  */ 
+function prepareDate(dateValue) {
+   fromDateArray=dateValue.match( /^([0-9]{2})([0-9]{2})([0-9]{2,4})$/);
+   if (fromDateArray){
+    if (fromDateArray[3].length<4)
+      fromDateArray[3]=2000 + parseInt(fromDateArray[3]);
+       return fromDateArray[1]+'-'+fromDateArray[2]+'-'+fromDateArray[3];
+   }
+   else{
+     return dateValue;
+  }
+ }
   /**
  * Hides print buttons for the iPad
  */
